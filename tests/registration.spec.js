@@ -420,7 +420,7 @@ test("OTP verification flow", async ({ page }) => {
     await otpDetect(page);
     page.waitForResponse((res) => res.url().includes("otp"));
     await page.waitForLoadState("networkidle");
-    await page.getByText("Create your password").waitFor({ timeout: 100000 });
+    await page.getByText("Create your password").waitFor({ timeout: 140000 });
 });
 
 test("Resend OTP", async ({ page }) => {

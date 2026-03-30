@@ -10,7 +10,7 @@ npx playwright install
 
 npx playwright test (Headless (Not show screen))
 
-npx playwright test --headed show screen
+npx playwright test --headed (show screen)
 
 📊 Report & Video of testing
 

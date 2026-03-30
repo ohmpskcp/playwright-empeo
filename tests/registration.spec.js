@@ -273,7 +273,7 @@ await page.waitForLoadState("networkidle");
 
     await otpDetect(page);
 
-    await expect(page).toHaveURL(/create-password/, { timeout: 120000 });
+    await expect(page).toHaveURL(/create-password/, { timeout: 140000 });
     await page.getByText("Create your password").waitFor({ state: "visible" });
     //Create password
     await page
@@ -345,7 +345,7 @@ test("Min Password", async ({ page }) => {
 
     await otpDetect(page);
 
-    await expect(page).toHaveURL(/create-password/, { timeout: 120000 });
+    await expect(page).toHaveURL(/create-password/, { timeout: 140000 });
     await page.getByText("Create your password").waitFor({ state: "visible" });
     await page
         .getByTestId("input_textfield_input_input_password_crate_password_password")

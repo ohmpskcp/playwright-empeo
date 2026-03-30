@@ -14,6 +14,6 @@ npx playwright test --headed
 
 npx playwright show-report
 
-📊 Report
+📊 Report & Video of testing
 
 npx playwright show-report

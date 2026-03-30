@@ -4,15 +4,13 @@
 
 npm install
 
-🚀 Run Test
-
 npx playwright install
 
-npx playwright test
+🚀 Run Test
 
-npx playwright test --headed
+npx playwright test (Headless (Not show screen))
 
-npx playwright show-report
+npx playwright test --headed show screen
 
 📊 Report & Video of testing
 

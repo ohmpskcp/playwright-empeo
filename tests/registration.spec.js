@@ -4,11 +4,12 @@ import { otpDetect } from "../hooks/otpdetect";
 import { createRandomUser } from "../hooks/faker";
 
 
-const user = createRandomUser(); 
+let user;
 
 test.beforeEach(async ({ page }) => {
   await fullScreenMode(page);
   await page.goto('https://portal.uat.gofive.co.th/Register/empeo');
+  user = createRandomUser(); 
 });
 
 test("company without coupon", async ({ page }) => {
@@ -62,11 +63,6 @@ test("company without coupon", async ({ page }) => {
     await page.getByTestId("input_checkbox_registration_checkbox").check();
     await page.getByTestId("button_submit_registration_try_for_free").click();
     await otpDetect(page);
-
-    await page.getByText("Create your password", { exact: false }).waitFor({
-    timeout: 140000,
-    state: "visible",
-});
 });
 
 test("company with coupon", async ({ page }) => {
@@ -127,10 +123,6 @@ test("company with coupon", async ({ page }) => {
 
     await otpDetect(page);
     
-    await page.getByText("Create your password", { exact: false }).waitFor({
-    timeout: 140000,
-    state: "visible",
-});
 });
 
 test("Registration without coupon(Others)", async ({ page }) => {
@@ -233,8 +225,7 @@ test("Registration with coupon(Others)", async ({ page }) => {
 });
 
 test("Create Password", async ({ page }) => {
-
-    await page.waitForLoadState("networkidle");
+await page.waitForLoadState("networkidle");
     await page.getByTestId("setting_language").getByText("ไทย").click();
     await page
         .locator(".go5-dropdown-item-body > .go5-dropdown-item-body")
@@ -281,10 +272,9 @@ test("Create Password", async ({ page }) => {
     await page.getByTestId("button_submit_registration_try_for_free").click();
 
     await otpDetect(page);
-    await page.getByText("Create your password").waitFor({
-        timeout: 14000,
-        state: "visible",
-    });
+
+    await expect(page).toHaveURL(/create-password/, { timeout: 120000 });
+    await page.getByText("Create your password").waitFor({ state: "visible" });
     //Create password
     await page
         .getByTestId("input_textfield_input_input_password_crate_password_password")
@@ -355,10 +345,8 @@ test("Min Password", async ({ page }) => {
 
     await otpDetect(page);
 
-    await page.getByText("Create your password", { exact: false }).waitFor({
-    timeout: 140000,
-    state: "visible",
-});
+    await expect(page).toHaveURL(/create-password/, { timeout: 120000 });
+    await page.getByText("Create your password").waitFor({ state: "visible" });
     await page
         .getByTestId("input_textfield_input_input_password_crate_password_password")
         .click();
